@@ -22,7 +22,11 @@ const daysList = computed(() => {
 
 <template>
     <div class="month-component">
-        <h2>{{ moment().month(props.month).format("MMMM") }}</h2>
+        <div class="month-title">
+            <button type="button" class="icon" alt="Go to previous month" title="Previous" @click="emit('goPrevious')"><</button>
+            <h2>{{ moment().month(props.month).format("MMMM") }}</h2>
+            <button type="button" class="icon" alt="Go to next month" title="Next" @click="emit('goNext')">></button>
+        </div>
 
         <div class="days-container" >
             <Day v-for="day of daysList" :key="day" :day="day" :year="year" :month="month"></Day>
@@ -30,3 +34,32 @@ const daysList = computed(() => {
 
     </div>
 </template>
+
+<style>
+.days-container {
+    display: grid;
+    gap: 5px;
+    padding: 10px;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(7, 1fr);
+}
+
+.month-title h2 {
+    display: inline;
+}
+
+.month-title button {
+    border-radius: 50%;
+    margin: 5px;
+    border: none;
+    height: 2rem;
+    width: 2rem;
+    font-weight: bold;
+}
+
+.month-title button:hover {
+    filter: brightness(120%);
+    cursor: pointer;
+}
+
+</style>

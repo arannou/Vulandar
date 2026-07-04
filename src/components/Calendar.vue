@@ -8,6 +8,25 @@ const currentYear = ref<number>(moment().year())
 const currentMonth = ref<number>(moment().month())
 
 const monthList = [...Array(12).keys()];
+
+const goPrevious= () => {
+    if (currentMonth.value == 0 ) {
+        // go to previous year
+        currentMonth.value = 11;
+        currentYear.value = currentYear.value - 1
+    } else {
+        currentMonth.value = currentMonth.value - 1
+    }
+}
+const goNext = () => {
+    if (currentMonth.value == 11 ) {
+        // go to next year
+        currentMonth.value = 0;
+        currentYear.value = currentYear.value + 1
+    } else {
+        currentMonth.value = currentMonth.value + 1
+    }
+}
 </script>
 
 <template>
@@ -22,7 +41,7 @@ const monthList = [...Array(12).keys()];
         </select>
     </div>
 
-    <Month :month="currentMonth" :year="currentYear"></Month>
+    <Month :month="currentMonth" :year="currentYear" @goNext="goNext" @goPrevious="goPrevious"></Month>
 
 
 </template>
