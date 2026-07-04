@@ -3,13 +3,19 @@ import { ref } from 'vue'
 import moment from 'moment';
 import Month from './Month.vue'
 
+// #####################################
+// DATA
+// #####################################
 
 const currentYear = ref<number>(moment().year())
 const currentMonth = ref<number>(moment().month())
 
 const monthList = [...Array(12).keys()];
 
-const goPrevious= () => {
+// #####################################
+// METHODS
+// #####################################
+const goPrevious = () => {
     if (currentMonth.value == 0 ) {
         // go to previous year
         currentMonth.value = 11;

@@ -1,18 +1,36 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import moment from 'moment';
 
 import Day from './Day.vue'
+import { Event, useEventStore } from "../store/events"
+import Popup from './Popup.vue';
+import EventView from './EventView.vue';
+import EventCreator from './EventCreator.vue';
 
+const eventStore = useEventStore()
 
+// #####################################
+// PROPS / EVENTS
+// #####################################
 const props = defineProps({
   month: { type: Number, default: 0 },
   year: { type: Number, default: moment().year() },
 })
 
+const emit = defineEmits(['goNext', 'goPrevious'])
 
-const emit = defineEmits([])
+// #####################################
+// DATA
+// #####################################
+const popupActive = ref<boolean>(false)
+const popupTitle = ref<string>("New event")
+const eventsOfDay = ref<Event[]>([])
+const editionMode = ref<boolean>(false)
 
+// #####################################
+// COMPUTED
+// #####################################
 const daysList = computed(() => {
     const daysInMonth = moment({ year: props.year, month: props.month }).daysInMonth()
     return [...Array(daysInMonth).keys()]
@@ -27,11 +45,46 @@ const padding = computed(() => {
     return firstDayOfMonth.weekday()
 })
 
+const eventsOfMonth = computed(() => {
+    return eventStore.getEventsByMonth(props.year, props.month)
+})
+
+// #####################################
+// METHODS
+// #####################################
+const onClickDay = (day: number) => {
+    console.log(day);
+    eventsOfDay.value = eventsOfMonth.value.filter(e => e.dayOfMonth == day)
+    
+    popupActive.value = true
+    if (eventsOfDay.value.length == 0) {
+        // create event
+        popupTitle.value = "New event"
+        editionMode.value = true
+    } else {
+        // display events
+        popupTitle.value = "Event of the day"
+        editionMode.value = false
+    }
+
+}
+
 
 </script>
 
 <template>
     <div class="month-component">
+        <Popup v-if="popupActive">
+            <template #name>{{ popupTitle }}</template>
+            <template #content>
+                <template v-if="editionMode">
+                    <EventCreator @cancel="popupActive=false"></EventCreator>
+                </template>
+                <template v-else>
+                    <EventView v-for="event of eventsOfDay" :existingEvent=event :key="event.name" @cancel="popupActive=false"></EventView>
+                </template>
+            </template>
+        </Popup>
         <div class="month-title">
             <button type="button" class="icon" alt="Go to previous month" title="Previous" @click="emit('goPrevious')"><</button>
             <h2>{{ moment().month(props.month).format("MMMM") }}</h2>
@@ -41,7 +94,7 @@ const padding = computed(() => {
         <div class="days-container" >
             <h3 v-for="day in daysOfWeek">{{ day }}</h3>
             <span v-for="_ in padding"></span>
-            <Day v-for="day of daysList" :key="day" :day="day" :year="year" :month="month"></Day>
+            <Day v-for="day of daysList" :key="day" :day="day" :year="year" :month="month" :events="eventsOfMonth" @click="onClickDay(day)"></Day>
         </div>
 
     </div>

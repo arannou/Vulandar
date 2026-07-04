@@ -1,0 +1,66 @@
+<script setup lang="ts">
+import { ref, computed, onMounted } from 'vue'
+import moment from 'moment';
+import { Event, useEventStore } from "../store/events"
+
+// #####################################
+// PROPS / EVENTS
+// #####################################
+const props = defineProps({
+  existingEvent: Event
+})
+
+const emit = defineEmits<{
+  (e: 'delete'): void
+  (e: 'cancel'): void
+}>()
+
+const displayedEvent = ref<Event>(new Event())
+
+onMounted(() => {
+    if (props.existingEvent) {
+        console.log(props.existingEvent)
+        displayedEvent.value = props.existingEvent
+    }
+})
+
+// #####################################
+// METHODS
+// #####################################
+const deleteEvent = () => {
+    emit('delete')
+}
+</script>
+
+<template>
+    <div class="event-component">
+        <div class="form-div">
+            <label for="name">Name</label>
+            <strong>{{ displayedEvent.name }}</strong>
+        </div>
+        <div class="form-div">
+            <label for="description">Description</label>
+            <strong> {{ displayedEvent.description || "No description"}}</strong>
+        </div>
+        <div class="form-div">
+            <label for="recurring">Occurs every year</label>
+            <p> {{ displayedEvent.recurring ? "✅" : "❌"}}</p>
+        </div>
+
+        <div>
+            <button type="button" @click="deleteEvent()">Delete</button>
+            <button type="button" @click="emit('cancel')">Close</button>
+        </div>
+    </div>
+</template>
+
+<style>
+.form-div label{
+    display: block;
+}
+
+.event-component button {
+    margin: 1rem;
+    margin-bottom: 0;
+}
+</style>
