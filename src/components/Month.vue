@@ -25,6 +25,7 @@ const emit = defineEmits(['goNext', 'goPrevious'])
 // #####################################
 const popupActive = ref<boolean>(false)
 const popupTitle = ref<string>("New event")
+const selectedDay = ref<number>(0)
 const eventsOfDay = ref<Event[]>([])
 const editionMode = ref<boolean>(false)
 
@@ -45,7 +46,7 @@ const padding = computed(() => {
     return firstDayOfMonth.weekday()
 })
 
-const eventsOfMonth = computed(() => {
+const eventsOfMonth = computed((): Event[] => {
     return eventStore.getEventsByMonth(props.year, props.month)
 })
 
@@ -53,7 +54,7 @@ const eventsOfMonth = computed(() => {
 // METHODS
 // #####################################
 const onClickDay = (day: number) => {
-    console.log(day);
+    selectedDay.value = day
     eventsOfDay.value = eventsOfMonth.value.filter(e => e.dayOfMonth == day)
     
     popupActive.value = true
@@ -78,7 +79,7 @@ const onClickDay = (day: number) => {
             <template #name>{{ popupTitle }}</template>
             <template #content>
                 <template v-if="editionMode">
-                    <EventCreator @cancel="popupActive=false"></EventCreator>
+                    <EventCreator @cancel="popupActive=false" :year="props.year" :month="props.month" :day="selectedDay"></EventCreator>
                 </template>
                 <template v-else>
                     <EventView v-for="event of eventsOfDay" :existingEvent=event :key="event.name" @cancel="popupActive=false"></EventView>

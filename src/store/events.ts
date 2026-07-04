@@ -9,6 +9,12 @@ export class Event {
     year?: number = undefined
     description?: string = undefined
     recurring: boolean = false
+
+    constructor(day: number, month: number, year: number) {
+        this.dayOfMonth = day
+        this.month = month
+        this.year = year
+    }
 }
 
 export const useEventStore = defineStore('events', () => {
