@@ -18,6 +18,16 @@ const daysList = computed(() => {
     return [...Array(daysInMonth).keys()]
 })
 
+const daysOfWeek = computed(() => {
+    return [...Array(7).keys()].map(d => moment().day(d).format('dddd'))
+})
+
+const padding = computed(() => {
+    const firstDayOfMonth = moment({ year: props.year, month: props.month, date:1 })
+    return firstDayOfMonth.weekday()
+})
+
+
 </script>
 
 <template>
@@ -29,6 +39,8 @@ const daysList = computed(() => {
         </div>
 
         <div class="days-container" >
+            <h3 v-for="day in daysOfWeek">{{ day }}</h3>
+            <span v-for="_ in padding"></span>
             <Day v-for="day of daysList" :key="day" :day="day" :year="year" :month="month"></Day>
         </div>
 

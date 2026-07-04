@@ -21,3 +21,14 @@ const emit = defineEmits([])
         
     </div>
 </template>
+
+<style>
+.day-component {
+    border: 1px solid #eee;
+    height: 4rem;
+}
+.day-component:hover {
+    background-color: #b5c5f567;
+    cursor: pointer;
+}
+</style>
