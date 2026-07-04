@@ -36,11 +36,11 @@ const goNext = () => {
 </script>
 
 <template>
-    <div>
+    <div class="picker">
         <label for="year">Change Year</label>
         <input type="number" name="year" v-model="currentYear">
     </div>
-    <div>
+    <div class="picker">
         <label for="month">Change Month</label>
         <select name="month" v-model="currentMonth">
             <option v-for="month in  monthList" :value="month">{{ moment().month(month).format("MMMM") }}</option>
@@ -51,3 +51,15 @@ const goNext = () => {
 
 
 </template>
+<style>
+.picker {
+    margin: 1rem;
+}
+.picker label {
+    display: inline-block;
+    width: 10rem;
+}
+.picker input, .picker select {
+    width: 10rem;
+}
+</style>

@@ -34,6 +34,10 @@ const save = () => {
         error.value = "Event must have a name"
         return
     }
+    if (editedEvent.value.name.length > 100) {
+        error.value = "Event name must be shorter than 100 characters"
+        return
+    }
     if (editedEvent.value.description == "") delete editedEvent.value.description
 
     eventStore.createEvent(editedEvent.value)
@@ -75,7 +79,9 @@ const save = () => {
 }
 
 .error-msg {
-    border: red;
+    border: red solid 1px;
+    color: red;
+    background-color: #f0cece;
     padding: 0.5rem;
 }
 </style>
