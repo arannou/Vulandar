@@ -55,6 +55,9 @@ const deleteEvent = () => {
 </template>
 
 <style>
+.form-div {
+    color: white;
+}
 .form-div label{
     display: block;
 }

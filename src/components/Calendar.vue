@@ -33,18 +33,22 @@ const goNext = () => {
         currentMonth.value = currentMonth.value + 1
     }
 }
+
+const goToday = () => {
+    currentYear.value = moment().year()
+    currentMonth.value = moment().month()
+}
 </script>
 
 <template>
-    <div class="picker">
+    <div class="jump"> 
         <label for="year">Change Year</label>
         <input type="number" name="year" v-model="currentYear">
-    </div>
-    <div class="picker">
         <label for="month">Change Month</label>
         <select name="month" v-model="currentMonth">
             <option v-for="month in  monthList" :value="month">{{ moment().month(month).format("MMMM") }}</option>
         </select>
+        <button type="button" title="Display current month" @click="goToday()">Today</button>
     </div>
 
     <Month :month="currentMonth" :year="currentYear" @goNext="goNext" @goPrevious="goPrevious"></Month>
@@ -52,14 +56,20 @@ const goNext = () => {
 
 </template>
 <style>
-.picker {
+.jump {
     margin: 1rem;
+    border-radius: 10px;
+    padding: 1rem;
+    background-color: #b5c5f567
 }
-.picker label {
+.jump label {
     display: inline-block;
-    width: 10rem;
 }
-.picker input, .picker select {
-    width: 10rem;
+.jump input {
+    width: 3rem;
+
+}
+.jump input, .jump select {
+    margin: 0 2rem 0 10px;
 }
 </style>
