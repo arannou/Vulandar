@@ -33,10 +33,11 @@ export const useEventStore = defineStore('events', () => {
         name: "My birthday 🎂",
         dayOfMonth: 22,
         month: 5,
+        description: "Anniversaire d'Alicia !",
         recurring: true,
         color: Colors.YELLOW
     }, {
-        name: "Fête nationale 🇫🇷",
+        name: "Fête nationale 🎆",
         dayOfMonth: 13,
         month: 6,
         recurring: true,
@@ -45,8 +46,9 @@ export const useEventStore = defineStore('events', () => {
         name: "Entretien ?",
         dayOfMonth: 7,
         month: 6,
-        description: "Futur entretien pour rejoindre vos équipes 😀",
+        description: "Futur entretien pour rejoindre vos équipes 😀. J'ai d'autres disponibilités bien sûr !",
         recurring: false,
+        year: 2026,
         color: Colors.BLUE
     } ]);
 

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, onMounted, onUnmounted, ref } from 'vue'
 import moment from 'moment';
 
 import Day from './Day.vue'
@@ -28,6 +28,7 @@ const popupTitle = ref<string>("New event")
 const selectedDay = ref<number>(0)
 const eventsOfDay = ref<Array<Event>>(Array<Event>())
 const editionMode = ref<boolean>(false)
+const winwidth = ref<number>(window.innerWidth)
 
 // #####################################
 // COMPUTED
@@ -39,7 +40,7 @@ const daysList = computed(() => {
 
 const daysOfWeek = computed(() => {
     let dayFomat = 'ddd'
-    if (window.innerWidth > 700) {
+    if (winwidth.value > 700) {
         dayFomat = 'dddd'
     }
     return [...Array(7).keys()].map(d => moment().day(d).format(dayFomat))
@@ -52,6 +53,21 @@ const padding = computed(() => {
 
 const eventsOfMonth = computed((): Event[] => {
     return eventStore.getEventsByMonth(props.year, props.month)
+})
+
+// #####################################
+// HOOKS
+// #####################################
+onMounted(() => {
+    window.addEventListener('resize', () => {
+        winwidth.value = window.innerWidth
+    })
+})
+
+onUnmounted(() => {
+    window.removeEventListener('resize', () => {
+        winwidth.value = window.innerWidth
+    })
 })
 
 // #####################################
