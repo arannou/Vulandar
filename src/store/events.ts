@@ -30,12 +30,25 @@ export const useEventStore = defineStore('events', () => {
 
     // State
     const events = ref<Event[]>([ {
-        name: "Mon Anniversaire",
+        name: "My birthday 🎂",
         dayOfMonth: 22,
         month: 5,
         recurring: true,
         color: Colors.YELLOW
-    }]);
+    }, {
+        name: "Fête nationale 🇫🇷",
+        dayOfMonth: 13,
+        month: 6,
+        recurring: true,
+        color: Colors.PURPLE
+    }, {
+        name: "Entretien ?",
+        dayOfMonth: 7,
+        month: 6,
+        description: "Futur entretien pour rejoindre vos équipes 😀",
+        recurring: false,
+        color: Colors.BLUE
+    } ]);
 
     const getEventsByMonth = (year: number, month: number): Event[] => {
         return events.value.filter(e => (e.year == year || e.recurring) && e.month == month)
