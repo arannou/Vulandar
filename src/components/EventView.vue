@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
-import moment from 'moment';
+import { ref, onMounted } from 'vue'
 import { Event, useEventStore } from "../store/events"
 
+
+const eventStore = useEventStore()
 // #####################################
 // PROPS / EVENTS
 // #####################################
@@ -11,7 +12,6 @@ const props = defineProps({
 })
 
 const emit = defineEmits<{
-  (e: 'delete'): void
   (e: 'cancel'): void
 }>()
 
@@ -28,7 +28,10 @@ onMounted(() => {
 // METHODS
 // #####################################
 const deleteEvent = () => {
-    emit('delete')
+    if (props.existingEvent) {
+        eventStore.deleteEvent(props.existingEvent)
+    }
+    emit('cancel')
 }
 </script>
 

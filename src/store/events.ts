@@ -46,10 +46,15 @@ export const useEventStore = defineStore('events', () => {
         events.value.push(event)
     }
 
+    const deleteEvent = (event: Event) => {
+        events.value = events.value.filter(e => e != event)
+    }
+
 
     return {
         events,
         getEventsByMonth,
-        createEvent
+        createEvent,
+        deleteEvent
     };
 });

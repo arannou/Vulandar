@@ -18,12 +18,16 @@ const eventsOfDay = computed(() => {
     if (!props.events) return []
     return props.events.filter(e => e.dayOfMonth == props.day)
 })
+
+const isThisDayToday = computed(() => {
+    return props.year == moment().year() && props.month == moment().month() && (props.day + 1) == moment().date()
+})
     
 
 </script>
 
 <template>
-    <div class="day-component">
+    <div :class="{'day-component': true, 'today': isThisDayToday}">
         <p>{{  props.day + 1 }}</p>
         <div v-for="event of eventsOfDay" class="event-preview" :style="'background-color:'+event.color ">{{ event.name }}</div>
     </div>
@@ -33,6 +37,9 @@ const eventsOfDay = computed(() => {
 .day-component {
     border: 1px solid #eee;
     min-height: 4rem;
+}
+.day-component.today {
+    border-color: yellow
 }
 .day-component:hover {
     background-color: #b5c5f567;
