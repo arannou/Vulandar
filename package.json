@@ -1,6 +1,6 @@
 {
   "name": "vulandar",
-  "private": true,
+  "homepage": "https://arannou.github.io/Vulandar/",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
