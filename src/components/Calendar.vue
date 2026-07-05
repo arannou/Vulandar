@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import moment from 'moment';
 import Month from './Month.vue'
 
@@ -42,12 +42,11 @@ const goToday = () => {
 
 <template>
     <div class="jump"> 
-        <label for="year">Change Year</label>
-        <input type="number" name="year" v-model="currentYear">
-        <label for="month">Change Month</label>
+        <label for="year">Go to</label>
         <select name="month" v-model="currentMonth">
             <option v-for="month in  monthList" :value="month">{{ moment().month(month).format("MMMM") }}</option>
         </select>
+        <input type="number" name="year" v-model="currentYear">
         <button type="button" title="Display current month" @click="goToday()">Today</button>
     </div>
 
@@ -64,12 +63,16 @@ const goToday = () => {
 }
 .jump label {
     display: inline-block;
+    margin-right: .5rem;
 }
 .jump input {
     width: 3rem;
-
 }
 .jump input, .jump select {
-    margin: 0 2rem 0 10px;
+    margin: 0 .5rem 0 0;
+}
+
+.jump button {
+    margin-left: 2rem;
 }
 </style>

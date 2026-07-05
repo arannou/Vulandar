@@ -38,7 +38,11 @@ const daysList = computed(() => {
 })
 
 const daysOfWeek = computed(() => {
-    return [...Array(7).keys()].map(d => moment().day(d).format('dddd'))
+    let dayFomat = 'ddd'
+    if (window.innerWidth > 700) {
+        dayFomat = 'dddd'
+    }
+    return [...Array(7).keys()].map(d => moment().day(d).format(dayFomat))
 })
 
 const padding = computed(() => {

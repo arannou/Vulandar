@@ -48,6 +48,15 @@ const isThisDayToday = computed(() => {
 .event-preview {
     color: white;
     border-radius: 10px;
-    margin: 2px;
+    margin: auto;
+    font-size: .7rem;
+    max-width: 12vw;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
+
+@media screen and (min-height: 700px) {
+}
+
 </style>
