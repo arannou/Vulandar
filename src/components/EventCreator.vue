@@ -13,14 +13,12 @@ const props = defineProps({
   year: { type: Number, default: moment().year() }
 })
 
-const emit = defineEmits<{
-  (e: 'cancel'): void
-}>()
+const emit = defineEmits(['cancel'])
 
 // #####################################
 // DATA
 // #####################################
-const error = ref<string | null>()
+const error = ref<string | undefined>(undefined);
 const editedEvent = ref<Event>(new Event(props.day, props.month, props.year))
 
 
@@ -46,32 +44,68 @@ const save = () => {
 </script>
 
 <template>
-    <div class="event-component">
-        <div class="form-div">
-            <label for="name">Name</label>
-            <input type="text" name="name" v-model="editedEvent.name"/>
-        </div>
-        <div class="form-div">
-            <label for="description">Description</label>
-            <input type="text" name="description" v-model="editedEvent.description"/>
-        </div>
-        <div class="form-div">
-            <label for="recurring">Occurs every year</label>
-            <input type="checkbox" name="recurring" v-model="editedEvent.recurring"/>
-        </div>
-        <div class="form-div">
-            <label for="color">Color</label>
-            <select name="month" v-model="editedEvent.color">
-                <option v-for="[name, color] of Object.entries(Colors)" :value="color">{{ name }}</option>
-            </select>
-        </div>
-
-        <p class="error-msg" v-if="error"> {{ error }}</p>
-        <div>
-            <button type="button" @click="save()">Save</button>
-            <button type="button" @click="emit('cancel')">Cancel</button>
-        </div>
+  <div class="event-component">
+    <div class="form-div">
+      <label for="name">Name</label>
+      <input
+        v-model="editedEvent.name"
+        type="text"
+        name="name"
+      >
     </div>
+    <div class="form-div">
+      <label for="description">Description</label>
+      <input
+        v-model="editedEvent.description"
+        type="text"
+        name="description"
+      >
+    </div>
+    <div class="form-div">
+      <label for="recurring">Occurs every year</label>
+      <input
+        v-model="editedEvent.recurring"
+        type="checkbox"
+        name="recurring"
+      >
+    </div>
+    <div class="form-div">
+      <label for="color">Color</label>
+      <select
+        v-model="editedEvent.color"
+        name="month"
+      >
+        <option
+          v-for="[name, color] of Object.entries(Colors)"
+          :key="name"
+          :value="color"
+        >
+          {{ name }}
+        </option>
+      </select>
+    </div>
+
+    <p
+      v-if="error"
+      class="error-msg"
+    >
+      {{ error }}
+    </p>
+    <div>
+      <button
+        type="button"
+        @click="save()"
+      >
+        Save
+      </button>
+      <button
+        type="button"
+        @click="emit('cancel')"
+      >
+        Cancel
+      </button>
+    </div>
+  </div>
 </template>
 
 <style>

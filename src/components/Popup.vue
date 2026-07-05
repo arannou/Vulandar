@@ -1,20 +1,13 @@
 <script setup lang="ts">
-
-// #####################################
-// PROPS / EVENTS
-// #####################################
-const emit = defineEmits<{
-  (e: 'close'): void
-}>()
-
 </script>
 
 <template>
   <div
-    class="popup-component">
+    class="popup-component"
+  >
     <div class="popup-content">
-        <h2><slot name="name"> </slot></h2>
-        <slot name="content"> </slot>
+      <h2><slot name="name" /></h2>
+      <slot name="content" />
     </div>
   </div>
 </template>

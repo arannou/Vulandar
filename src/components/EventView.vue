@@ -11,9 +11,7 @@ const props = defineProps({
   existingEvent: Event
 })
 
-const emit = defineEmits<{
-  (e: 'cancel'): void
-}>()
+const emit = defineEmits(['cancel'])
 
 const displayedEvent = ref<Event>(new Event(0, 0, 1970))
 
@@ -36,25 +34,35 @@ const deleteEvent = () => {
 </script>
 
 <template>
-    <div class="event-component">
-        <div class="form-div">
-            <label for="name">Name</label>
-            <strong>{{ displayedEvent.name }}</strong>
-        </div>
-        <div class="form-div">
-            <label for="description">Description</label>
-            <strong> {{ displayedEvent.description || "No description"}}</strong>
-        </div>
-        <div class="form-div">
-            <label for="recurring">Occurs every year</label>
-            <p> {{ displayedEvent.recurring ? "✅" : "❌"}}</p>
-        </div>
-
-        <div>
-            <button type="button" @click="deleteEvent()">Delete</button>
-            <button type="button" @click="emit('cancel')">Close</button>
-        </div>
+  <div class="event-component">
+    <div class="form-div">
+      <label for="name">Name</label>
+      <strong>{{ displayedEvent.name }}</strong>
     </div>
+    <div class="form-div">
+      <label for="description">Description</label>
+      <strong> {{ displayedEvent.description || "No description" }}</strong>
+    </div>
+    <div class="form-div">
+      <label for="recurring">Occurs every year</label>
+      <p> {{ displayedEvent.recurring ? "✅" : "❌" }}</p>
+    </div>
+
+    <div>
+      <button
+        type="button"
+        @click="deleteEvent()"
+      >
+        Delete
+      </button>
+      <button
+        type="button"
+        @click="emit('cancel')"
+      >
+        Close
+      </button>
+    </div>
+  </div>
 </template>
 
 <style>

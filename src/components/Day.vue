@@ -10,7 +10,7 @@ const props = defineProps({
   day: { type: Number, default: 0 },
   month: { type: Number, default: 0 },
   year: { type: Number, default: moment().year() },
-  events: { type: Array<EventType> }
+  events: { type: Array<EventType>, default: () => [] }
 })
 
 

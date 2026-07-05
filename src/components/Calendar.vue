@@ -41,18 +41,40 @@ const goToday = () => {
 </script>
 
 <template>
-    <div class="jump"> 
-        <label for="year">Go to</label>
-        <select name="month" v-model="currentMonth">
-            <option v-for="month in  monthList" :value="month">{{ moment().month(month).format("MMMM") }}</option>
-        </select>
-        <input type="number" name="year" v-model="currentYear">
-        <button type="button" title="Display current month" @click="goToday()">Today</button>
-    </div>
+  <div class="jump"> 
+    <label for="year">Go to</label>
+    <select
+      v-model="currentMonth"
+      name="month"
+    >
+      <option
+        v-for="month in monthList"
+        :key="month"
+        :value="month"
+      >
+        {{ moment().month(month).format("MMMM") }}
+      </option>
+    </select>
+    <input
+      v-model="currentYear"
+      type="number"
+      name="year"
+    >
+    <button
+      type="button"
+      title="Display current month"
+      @click="goToday()"
+    >
+      Today
+    </button>
+  </div>
 
-    <Month :month="currentMonth" :year="currentYear" @goNext="goNext" @goPrevious="goPrevious"></Month>
-
-
+  <Month
+    :month="currentMonth"
+    :year="currentYear"
+    @go-next="goNext"
+    @go-previous="goPrevious"
+  />
 </template>
 <style>
 .jump {

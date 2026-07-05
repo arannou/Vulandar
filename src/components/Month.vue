@@ -26,7 +26,7 @@ const emit = defineEmits(['goNext', 'goPrevious'])
 const popupActive = ref<boolean>(false)
 const popupTitle = ref<string>("New event")
 const selectedDay = ref<number>(0)
-const eventsOfDay = ref<Event[]>([])
+const eventsOfDay = ref<Array<Event>>(Array<Event>())
 const editionMode = ref<boolean>(false)
 
 // #####################################
