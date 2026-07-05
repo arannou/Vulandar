@@ -39,14 +39,15 @@ const daysList = computed(() => {
 })
 
 const daysOfWeek = computed(() => {
-    let dayFomat = 'ddd'
+    let dayFomat = 'ddd' // like 'Sun'
     if (winwidth.value > 700) {
-        dayFomat = 'dddd'
+        dayFomat = 'dddd' // like 'Sunday'
     }
     return [...Array(7).keys()].map(d => moment().day(d).format(dayFomat))
 })
 
 const padding = computed(() => {
+    // shift the first day of the month to the right to match the correct weekday
     const firstDayOfMonth = moment({ year: props.year, month: props.month, date:1 })
     return firstDayOfMonth.weekday()
 })
@@ -60,6 +61,7 @@ const eventsOfMonth = computed((): Event[] => {
 // #####################################
 onMounted(() => {
     window.addEventListener('resize', () => {
+        // switch to display full day names if the window is wide enough
         winwidth.value = window.innerWidth
     })
 })

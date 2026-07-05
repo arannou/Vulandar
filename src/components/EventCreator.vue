@@ -36,10 +36,11 @@ const save = () => {
         error.value = "Event name must be shorter than 100 characters"
         return
     }
+    // avoid empty property
     if (editedEvent.value.description == "") delete editedEvent.value.description
 
     eventStore.createEvent(editedEvent.value)
-    emit('cancel')
+    emit('cancel') // close the popup
 }
 </script>
 

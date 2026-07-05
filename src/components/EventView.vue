@@ -4,6 +4,7 @@ import { Event, useEventStore } from "../store/events"
 
 
 const eventStore = useEventStore()
+
 // #####################################
 // PROPS / EVENTS
 // #####################################
@@ -17,7 +18,6 @@ const displayedEvent = ref<Event>(new Event(0, 0, 1970))
 
 onMounted(() => {
     if (props.existingEvent) {
-        console.log(props.existingEvent)
         displayedEvent.value = props.existingEvent
     }
 })
@@ -29,7 +29,7 @@ const deleteEvent = () => {
     if (props.existingEvent) {
         eventStore.deleteEvent(props.existingEvent)
     }
-    emit('cancel')
+    emit('cancel') // close the popup
 }
 </script>
 

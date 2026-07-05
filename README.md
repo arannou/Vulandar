@@ -20,3 +20,10 @@ Ideas to go further:
 * Support internationalization EN | FR and set monday to start the week
 * Add week number
 * Add persistency 
+
+## To install
+
+* Clone this repo
+* Ensure to have Node.js LTS installed
+* Run `npm install`
+* Run `npm run dev` and open the browser with Vite default port 5173

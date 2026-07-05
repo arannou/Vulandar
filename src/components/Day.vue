@@ -20,6 +20,7 @@ const eventsOfDay = computed(() => {
 })
 
 const isThisDayToday = computed(() => {
+    // day + 1 because day is zero indexed but moment().date() is 1 indexed
     return props.year == moment().year() && props.month == moment().month() && (props.day + 1) == moment().date()
 })
     
