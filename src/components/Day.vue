@@ -25,7 +25,7 @@ const eventsOfDay = computed(() => {
 <template>
     <div class="day-component">
         <p>{{  props.day + 1 }}</p>
-        <div v-for="event of eventsOfDay" class="event-preview">{{ event.name }}</div>
+        <div v-for="event of eventsOfDay" class="event-preview" :style="'background-color:'+event.color ">{{ event.name }}</div>
     </div>
 </template>
 
@@ -39,7 +39,6 @@ const eventsOfDay = computed(() => {
     cursor: pointer;
 }
 .event-preview {
-    background-color: #2589db;
     color: white;
     border-radius: 10px;
     margin: 2px;

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
+import { ref } from 'vue'
 import moment from 'moment';
-import { Event, useEventStore } from "../store/events"
+import { Event, useEventStore, Colors } from "../store/events"
 
 const eventStore = useEventStore()
 // #####################################
@@ -58,6 +58,12 @@ const save = () => {
         <div class="form-div">
             <label for="recurring">Occurs every year</label>
             <input type="checkbox" name="recurring" v-model="editedEvent.recurring"/>
+        </div>
+        <div class="form-div">
+            <label for="color">Color</label>
+            <select name="month" v-model="editedEvent.color">
+                <option v-for="[name, color] of Object.entries(Colors)" :value="color">{{ name }}</option>
+            </select>
         </div>
 
         <p class="error-msg" v-if="error"> {{ error }}</p>

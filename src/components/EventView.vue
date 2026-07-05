@@ -15,7 +15,7 @@ const emit = defineEmits<{
   (e: 'cancel'): void
 }>()
 
-const displayedEvent = ref<Event>(new Event())
+const displayedEvent = ref<Event>(new Event(0, 0, 1970))
 
 onMounted(() => {
     if (props.existingEvent) {

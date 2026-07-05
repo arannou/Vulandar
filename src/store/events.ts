@@ -1,11 +1,20 @@
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
+export enum Colors {
+    RED = "#e25e54",
+    ORANGE = "#ec9d53",
+    YELLOW = "#eccf25",
+    GREEN = "#4dce5e",
+    BLUE = "#2589db",
+    PURPLE = "#bd5ee2",
+}
 
 export class Event {
     name: string = ""
     dayOfMonth: number = 0
     month: number = 0
+    color: Colors = Colors.BLUE
     year?: number = undefined
     description?: string = undefined
     recurring: boolean = false
@@ -24,7 +33,8 @@ export const useEventStore = defineStore('events', () => {
         name: "Mon Anniversaire",
         dayOfMonth: 22,
         month: 5,
-        recurring: true
+        recurring: true,
+        color: Colors.YELLOW
     }]);
 
     const getEventsByMonth = (year: number, month: number): Event[] => {
