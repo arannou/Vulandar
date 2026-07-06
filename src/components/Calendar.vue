@@ -41,25 +41,27 @@ const goToday = () => {
 </script>
 
 <template>
-  <div class="jump"> 
-    <label for="year">Go to</label>
-    <select
-      v-model="currentMonth"
-      name="month"
-    >
-      <option
-        v-for="month in monthList"
-        :key="month"
-        :value="month"
+  <div class="jump">
+    <div>
+      <label for="year">Go to</label>
+      <select
+        v-model="currentMonth"
+        name="month"
       >
-        {{ moment().month(month).format("MMMM") }}
-      </option>
-    </select>
-    <input
-      v-model="currentYear"
-      type="number"
-      name="year"
-    >
+        <option
+          v-for="month in monthList"
+          :key="month"
+          :value="month"
+        >
+          {{ moment().month(month).format("MMMM") }}
+        </option>
+      </select>
+      <input
+        v-model="currentYear"
+        type="number"
+        name="year"
+      >
+    </div>
     <button
       type="button"
       title="Display current month"
@@ -81,7 +83,11 @@ const goToday = () => {
     margin: 1rem;
     border-radius: 10px;
     padding: 1rem;
-    background-color: #b5c5f567
+    background-color: #b5c5f567;
+    display: flex;
+        flex-wrap: wrap;
+    justify-content: center;
+    align-items: baseline;
 }
 .jump label {
     display: inline-block;
@@ -95,6 +101,6 @@ const goToday = () => {
 }
 
 .jump button {
-    margin-left: 2rem;
+    margin: 5px 2rem;
 }
 </style>

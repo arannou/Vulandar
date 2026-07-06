@@ -145,9 +145,4 @@ const onClickDay = (day: number) => {
     font-weight: bold;
 }
 
-.month-title button:hover {
-    filter: brightness(120%);
-    cursor: pointer;
-}
-
 </style>

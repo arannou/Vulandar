@@ -50,6 +50,13 @@ export const useEventStore = defineStore('events', () => {
         recurring: false,
         year: 2026,
         color: Colors.BLUE
+    }, {
+        name: "Férié",
+        dayOfMonth: 14,
+        month: 7,
+        description: "Assomption",
+        recurring: true,
+        color: Colors.GREEN
     } ]);
 
     const getEventsByMonth = (year: number, month: number): Event[] => {
